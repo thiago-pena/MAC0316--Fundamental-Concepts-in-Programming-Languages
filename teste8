@@ -1,1 +1,0 @@
-if 1 { call fatorial (5) } else { -1 / 4 - 1 + 2 * 3 }
