@@ -15,15 +15,13 @@ char *dup(char *orig) {
 	return res;
 }
 char *ifElseOper(char *cond, char *sim, char *nao) {
-	char *res = malloc(strlen(cond) + strlen(sim) + strlen(nao) + 9);
+	char *res = malloc(strlen(cond) + strlen(sim) + strlen(nao) + 8);
 	sprintf(res, "(if %s %s %s)", cond, sim, nao);
 	return res;
 }
 char *fun(char *funName, char *arg) {
 	char *res = malloc(strlen(funName) + strlen(arg) + 9);
-	//printf("teste -> %s\n", funName);
-	//printf("teste -> %s\n", arg);
-	sprintf(res, "'(call %s %s)", funName, arg);
+	sprintf(res, "(call %s %s)", funName, arg);
 	return res;
 }
 int yylex();

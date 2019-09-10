@@ -1,7 +1,7 @@
 DIGIT   [0-9]
 E   [Ee][+-]?{DIGIT}+
 NUMBER ({DIGIT}+[.]?{DIGIT}*|{DIGIT}*[.]?{DIGIT}+){E}?
-NAME  [a-z][a-z0-9_]+
+NAME  [a-zA-Z][a-zA-Z0-9]+
 
 /* NUMBER: Reconhece tanto '3.' quanto '.3', por exemplo. */
 
