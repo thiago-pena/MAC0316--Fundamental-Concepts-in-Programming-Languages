@@ -1,0 +1,33 @@
+;        Parser           Desugar           Interpreter
+;        parse            desugar              interp
+; s-exp --------> ArithS ---------> ArithC -------------> number
+;
+;                                    interpS
+;                 ArithS -------------------------------> number
+
+
+(interp (desugar (parse '(+ 2 3))))
+; ou
+(interpS (parse '(+ 2 3)))
+
+
+;        Parser           Desugar          Interpreter
+;        parse            desugar             interp
+; s-exp --------> ArithS ---------> ExprC -------------> number
+;
+;                                    interpS
+;                 ArithS -------------------------------> number
+
+; Auxiliares
+; get-fundef : symbol*(listof FunDefC) -> FunDefC
+; subst: ExprC*symbol*ExprC -> ExprC
+
+; LISTS
+; Since a Racket list is a linked list, the two core operations on a non-empty list are
+    ; first: get the first thing in the list; and
+    ; rest: get the rest of the list.
+; cons: To create a new node for a linked list—that is, to add to the front of
+    ; the list—use the cons function, which is short for “construct.”
+    ; To get an empty list to start with, use the 'empty' constant.
+; empty? function detects empty lists,
+; cons? detects non-empty lists
