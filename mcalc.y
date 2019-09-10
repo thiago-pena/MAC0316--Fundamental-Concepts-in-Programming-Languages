@@ -19,6 +19,13 @@ char *ifElseOper(char *cond, char *sim, char *nao) {
 	sprintf(res, "(if %s %s %s)", cond, sim, nao);
 	return res;
 }
+char *fun(char *funName, char *arg) {
+	char *res = malloc(strlen(funName) + strlen(arg) + 9);
+	//printf("teste -> %s\n", funName);
+	//printf("teste -> %s\n", arg);
+	sprintf(res, "'(call %s %s)", funName, arg);
+	return res;
+}
 int yylex();
 void yyerror(char *);
 %}
@@ -27,8 +34,8 @@ void yyerror(char *);
 	char *val;
 }
 
-%token	<val> NUM
-%token ADD SUB MUL DIV PRINT OPEN CLOSE IF ELSE ENDIF S_INI S_END
+%token	<val> NUM S
+%token ADD SUB MUL DIV PRINT OPEN CLOSE IF ELSE ENDIF S_INI S_END CALL
 %type <val> exp
 
 %left ADD SUB
@@ -43,7 +50,8 @@ input:
 		| 		error  	{ fprintf(stderr, "Entrada inválida\n"); }
 ;
 
-exp: 			NUM 				{ $$ = dup($1); }
+
+exp:			NUM 				{ $$ = dup($1); }
 		| 		exp ADD exp			{ $$ = oper('+', $1, $3);}
 		| 		exp SUB exp			{ $$ = oper('-', $1, $3);}
 		| 		exp MUL exp			{ $$ = oper('*', $1, $3);}
@@ -51,6 +59,7 @@ exp: 			NUM 				{ $$ = dup($1); }
 		| 		SUB exp %prec NEG  	{ $$ = oper('~', $2, "");}
 		| 		OPEN exp CLOSE		{ $$ = dup($2);}
 		| 		IF exp S_INI exp S_END ELSE S_INI exp S_END	{ $$ = ifElseOper($2, $4, $8);}
+		| 		CALL S OPEN exp CLOSE		{ $$ = fun($2, $4);}
 ;
 
 %%

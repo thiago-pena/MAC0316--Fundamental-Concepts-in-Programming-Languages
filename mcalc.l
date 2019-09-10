@@ -1,19 +1,28 @@
 DIGIT   [0-9]
 E   [Ee][+-]?{DIGIT}+
 NUMBER ({DIGIT}+[.]?{DIGIT}*|{DIGIT}*[.]?{DIGIT}+){E}?
-SYMBOL  [a-z][a-z0-9_]+
+NAME  [a-z][a-z0-9_]+
 
 /* NUMBER: Reconhece tanto '3.' quanto '.3', por exemplo. */
 
 
 %{
 #include <math.h>
+#include <stdlib.h> // teste
+#include <string.h> // teste
 #include "mcalc.tab.h"
 
 %}
 
 
 %%
+if		{ return IF; }
+else	{ return ELSE; }
+endif	{ return ENDIF; }
+call    { return CALL; }
+{NAME}          {   char *t = malloc(strlen(yytext) + 1);
+                    yylval.val = strcpy(t, yytext);
+                    return S;   }
 {NUMBER}      	{ yylval.val = yytext; return NUM; }
 
 
@@ -30,9 +39,7 @@ SYMBOL  [a-z][a-z0-9_]+
 [/]		{ return DIV; }
 [{]     { return S_INI; }
 [}]     { return S_END; }
-if		{ return IF; }
-else	{ return ELSE; }
-endif	{ return ENDIF; }
+
 
 
 .	{  fprintf(stderr, "Entrada ignorada\n-->%s\n", yytext); }
