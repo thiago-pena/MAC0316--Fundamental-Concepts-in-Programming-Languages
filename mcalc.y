@@ -14,10 +14,9 @@ char *dup(char *orig) {
 	strcpy(res,orig);
 	return res;
 }
-char *testePena(char *l, char *r) {
-	char *res = malloc(strlen(l) + strlen(r) + 1);
-	printf("-------------\n");
-	sprintf(res, "'(%s %s)", l, r);
+char *ifElseOper(char *cond, char *sim, char *nao) {
+	char *res = malloc(strlen(cond) + strlen(sim) + strlen(nao) + 9);
+	sprintf(res, "(if %s %s %s)", cond, sim, nao);
 	return res;
 }
 int yylex();
@@ -29,16 +28,12 @@ void yyerror(char *);
 }
 
 %token	<val> NUM
-/* %token  ADD SUB MUL PRINT OPEN CLOSE */
-%token ADD SUB MUL DIV PRINT OPEN CLOSE
+%token ADD SUB MUL DIV PRINT OPEN CLOSE IF ELSE ENDIF S_INI S_END
 %type <val> exp
-%token <val> FUNC
 
 %left ADD SUB
 %left MUL DIV
 %left NEG
-// checar precedências daqui pra baixo
-
 
 /* Gramatica */
 %%
@@ -48,13 +43,14 @@ input:
 		| 		error  	{ fprintf(stderr, "Entrada inválida\n"); }
 ;
 
-exp: 			NUM 			{ $$ = dup($1); }
-		| 		exp ADD exp		{ $$ = oper('+', $1, $3);}
-		| 		exp SUB exp		{ $$ = oper('-', $1, $3);}
-		| 		exp MUL exp		{ $$ = oper('*', $1, $3);}
-		| 		exp DIV exp		{ $$ = oper('/', $1, $3);}
-		| 		SUB exp %prec NEG  { $$ = oper('~', $2, "");}
-		| 		OPEN exp CLOSE	{ $$ = dup($2);}
+exp: 			NUM 				{ $$ = dup($1); }
+		| 		exp ADD exp			{ $$ = oper('+', $1, $3);}
+		| 		exp SUB exp			{ $$ = oper('-', $1, $3);}
+		| 		exp MUL exp			{ $$ = oper('*', $1, $3);}
+		| 		exp DIV exp			{ $$ = oper('/', $1, $3);}
+		| 		SUB exp %prec NEG  	{ $$ = oper('~', $2, "");}
+		| 		OPEN exp CLOSE		{ $$ = dup($2);}
+		| 		IF exp S_INI exp S_END ELSE S_INI exp S_END	{ $$ = ifElseOper($2, $4, $8);}
 ;
 
 %%

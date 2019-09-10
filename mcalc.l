@@ -1,6 +1,10 @@
-D [0-9]
-C [a-zA-Z]+
-E [Ee][+-]?{D}+
+DIGIT   [0-9]
+E   [Ee][+-]?{DIGIT}+
+NUMBER ({DIGIT}+[.]?{DIGIT}*|{DIGIT}*[.]?{DIGIT}+){E}?
+SYMBOL  [a-z][a-z0-9_]+
+
+/* NUMBER: Reconhece tanto '3.' quanto '.3', por exemplo. */
+
 
 %{
 #include <math.h>
@@ -10,7 +14,7 @@ E [Ee][+-]?{D}+
 
 
 %%
-{D}*[.]?{D}+{E}?	{ yylval.val = yytext; return NUM; }
+{NUMBER}      	{ yylval.val = yytext; return NUM; }
 
 
 
@@ -24,6 +28,11 @@ E [Ee][+-]?{D}+
 [-]		{ return SUB; }
 [*]		{ return MUL; }
 [/]		{ return DIV; }
+[{]     { return S_INI; }
+[}]     { return S_END; }
+if		{ return IF; }
+else	{ return ELSE; }
+endif	{ return ENDIF; }
 
 
 .	{  fprintf(stderr, "Entrada ignorada\n-->%s\n", yytext); }

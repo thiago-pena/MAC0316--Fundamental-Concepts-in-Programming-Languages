@@ -1,1 +1,1 @@
-call dobro 2
+if 3 { 4 }else {1}

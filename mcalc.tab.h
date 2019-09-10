@@ -53,8 +53,12 @@ extern int yydebug;
     PRINT = 263,
     OPEN = 264,
     CLOSE = 265,
-    FUNC = 266,
-    NEG = 267
+    IF = 266,
+    ELSE = 267,
+    ENDIF = 268,
+    S_INI = 269,
+    S_END = 270,
+    NEG = 271
   };
 #endif
 
@@ -63,11 +67,11 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 27 "mcalc.y" /* yacc.c:1909  */
+#line 26 "mcalc.y" /* yacc.c:1909  */
 
 	char *val;
 
-#line 71 "mcalc.tab.h" /* yacc.c:1909  */
+#line 75 "mcalc.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
