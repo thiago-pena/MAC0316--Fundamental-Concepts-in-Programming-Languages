@@ -101,6 +101,3 @@
 (define (interpS [a : ExprS]) (interp (desugar a) bib))
 
 (interp (desugar (parse (read))) bib)
-; tirar o comentário acima para dar make
-
-; -------------- TESTES --------------
