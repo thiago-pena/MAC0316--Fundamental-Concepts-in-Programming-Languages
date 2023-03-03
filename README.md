@@ -1,27 +1,27 @@
-# conceitos-ep1
+# MAC0316 Fundamental Concepts in Programming Languages (2019)
+Undergraduate subject of the Bachelor's Degree in Computer Science at IME-USP.
 
-Nome: Thiago Jose Benitez Pena
-nUSP: 6847829
+View [course description](https://uspdigital.usp.br/jupiterweb/obterDisciplina?nomdis=&sgldis=mac0316).
 
-1. Descrição da linguagem
+## 1. Descrição da linguagem
 As operações básicas estão como no arquivo de exemplo. As sintaxes das operações adicionais são:
-    1.1. divisão:
-        <número>/<número>
+### 1.1. divisão
+    <número>/<número>
 
-    1.2. condicional:
-        if <condição> { <expressão> } else { <expressão> }
+### 1.2. condicional
+    if <condição> { <expressão> } else { <expressão> }
 
-    1.3. chamada de função:
-        call <nome da função> ( <argumento> )
+### 1.3. chamada de função
+    call <nome da função> ( <argumento> )
 
-    Para realizar os testes, basta abrir e rodar o arquivo 'testesRacket.rkt' no Dr. Racket que eles serão executados automaticamente. Ela é uma cópia do arquivo 'direto.rkt', mas sem o comando 'read'.
+Para realizar os testes, basta abrir e rodar o arquivo 'testesRacket.rkt' no Dr. Racket que eles serão executados automaticamente. Ela é uma cópia do arquivo 'direto.rkt', mas sem o comando 'read'.
 
-    Foram criadas 2 funções adicionais:
-        (A) 'pow2n', que recebe um parâmetro n e retorna 2**n;
-        (B) 'Sn', que recebe um parâmetro n e retorna a soma 1 + 2 + 3 + ... + n
+Foram criadas 2 funções adicionais:
+   1. 'pow2n', que recebe um parâmetro n e retorna 2**n;
+   2. 'Sn', que recebe um parâmetro n e retorna a soma 1 + 2 + 3 + ... + n
 
 
-2. Gramática
+## 2. Gramática
 Para o compilador, foram usados o FLEX e o BISON.
 Para os testes, utilizei um script em bash 'testesFlexBison.sh'
 Para executá-lo, após rodar o make, basta rodar o comando 'sh testesFlexBison.sh'
